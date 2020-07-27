@@ -64,8 +64,8 @@ py::class_<Quat> bind_quaternion(py::module &m, py::module &s, const char *name)
                           [](Quat &a, const Value &v) { a.x() = v; });
     cls.def_property("y", [](const Quat &a) { return a.y(); },
                           [](Quat &a, const Value &v) { a.y() = v; });
-    cls.def_property("y", [](const Quat &a) { return a.y(); },
-                          [](Quat &a, const Value &v) { a.y() = v; });
+    cls.def_property("z", [](const Quat &a) { return a.z(); },
+                          [](Quat &a, const Value &v) { a.z() = v; });
     cls.def_property("w", [](const Quat &a) { return a.w(); },
                           [](Quat &a, const Value &v) { a.w() = v; });
 
@@ -82,6 +82,7 @@ py::class_<Quat> bind_quaternion(py::module &m, py::module &s, const char *name)
           },
           "a"_a, "b"_a, "t"_a);
 
+    m.def("quat_to_euler", [](const Quat &q) { return quat_to_euler<Vector3f>(q); });
     m.def("quat_to_matrix", [](const Quat &q) { return quat_to_matrix<Matrix4f>(q); });
     m.def("matrix_to_quat", [](const Matrix4f &m) { return matrix_to_quat(m); });
 

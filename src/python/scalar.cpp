@@ -171,6 +171,11 @@ PYBIND11_MODULE(scalar, s) {
     m.def("none_nested", [](bool a) { return !a; });
     m.def("count_nested", [](bool a) { return a ? 1 : 0; });
 
+    m.def("eq",  [](Float a, Float b) { return eq(a, b); });
+    m.def("neq", [](Float a, Float b) { return neq(a, b); });
+
+    m.def("select", [](bool a, Float b, Float c) { return enoki::select(a, b, c); });
+
     bind_scalar_0d(m, s);
     bind_scalar_1d(m, s);
     bind_scalar_2d(m, s);
